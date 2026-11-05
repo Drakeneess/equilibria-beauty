@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type PointerEvent as ReactPointerEvent } from "react";
 import { BrandMark } from "./BrandMark";
 import { treatments, type TreatmentCategory } from "@/data/treatments";
 
@@ -40,6 +40,53 @@ export function BeautyLanding() {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
+  const heroPointerFrame = useRef<number | null>(null);
+
+  function moveHeroLight(event: ReactPointerEvent<HTMLElement>) {
+    if (event.pointerType !== "mouse" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (heroPointerFrame.current !== null) return;
+    const currentTarget = event.currentTarget;
+    const { clientX, clientY } = event;
+    heroPointerFrame.current = window.requestAnimationFrame(() => {
+      const rect = currentTarget.getBoundingClientRect();
+      const x = Math.min(82, Math.max(18, ((clientX - rect.left) / rect.width) * 100));
+      const y = Math.min(82, Math.max(18, ((clientY - rect.top) / rect.height) * 100));
+      currentTarget.style.setProperty("--glow-x", `${x.toFixed(1)}%`);
+      currentTarget.style.setProperty("--glow-y", `${y.toFixed(1)}%`);
+      heroPointerFrame.current = null;
+    });
+  }
+
+  function resetHeroLight(event: ReactPointerEvent<HTMLElement>) {
+    event.currentTarget.style.removeProperty("--glow-x");
+    event.currentTarget.style.removeProperty("--glow-y");
+  }
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (media.matches || !("IntersectionObserver" in window)) return;
+
+    const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.remove("reveal-pending");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -35px 0px" });
+
+    elements.forEach((element) => {
+      // Already visible content must never flash or be hidden during hydration.
+      if (element.getBoundingClientRect().top < window.innerHeight * 0.92) return;
+      element.classList.add("reveal-pending");
+      observer.observe(element);
+    });
+    return () => {
+      observer.disconnect();
+      elements.forEach((element) => element.classList.remove("reveal-pending"));
+      if (heroPointerFrame.current !== null) window.cancelAnimationFrame(heroPointerFrame.current);
+    };
+  }, []);
 
   useEffect(() => {
     const sectionIds = ["inicio", "tratamientos", "nosotros", "experiencia", "contacto"];
@@ -172,8 +219,9 @@ export function BeautyLanding() {
       </header>
 
       <main>
-        <section className="hero" id="inicio" aria-labelledby="hero-title">
+        <section className="hero" id="inicio" aria-labelledby="hero-title" onPointerMove={moveHeroLight} onPointerLeave={resetHeroLight}>
           <div className="hero-copy">
+            <span className="hero-glow" aria-hidden="true" />
             <div className="eyebrow light"><span className="tiny-rule" />Estética facial &amp; corporal</div>
             <h1 id="hero-title">Belleza en <em>equilibrio.</em></h1>
             <div className="rule" />
@@ -196,12 +244,12 @@ export function BeautyLanding() {
 
         <section className="services" id="tratamientos" aria-labelledby="services-title">
           <div className="wrap">
-            <div className="section-head">
+            <div className="section-head" data-reveal>
               <div className="eyebrow">Tratamientos destacados</div>
               <h2 className="section-title" id="services-title">El arte de <em>cuidarte.</em></h2>
               <p className="section-desc">Explora propuestas de estética facial y corporal. Los procedimientos presentados son ejemplos sujetos a la definición del catálogo oficial.</p>
             </div>
-            <div className="filter-row" role="group" aria-label="Filtrar tratamientos">
+            <div className="filter-row" role="group" aria-label="Filtrar tratamientos" data-reveal>
               {filters.map(item => <button type="button" key={item.id} className="filter" aria-pressed={filter === item.id} onClick={() => setFilter(item.id)}>{item.label}</button>)}
             </div>
             <p className="filter-feedback" aria-live="polite" aria-atomic="true">
@@ -235,7 +283,7 @@ export function BeautyLanding() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/beauty-studio.webp" alt="Concepto de identidad de Equilibria Beauty en letras doradas sobre madera" loading="lazy" />
             </div>
-            <div className="brand-story">
+            <div className="brand-story" data-reveal>
               <div className="eyebrow">Nuestra esencia</div>
               <h2 className="section-title" id="brand-title">Más que estética.<br /><em>Una experiencia.</em></h2>
               <p className="section-desc">Equilibria Beauty se enfoca en el cuidado estético facial y corporal, con una experiencia personalizada que comienza por conocer tus necesidades y objetivos.</p>
@@ -254,7 +302,7 @@ export function BeautyLanding() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/face-application.webp" alt="Aplicación de producto cosmético en un tratamiento estético facial" loading="lazy" />
             </div>
-            <div className="experience-details">
+            <div className="experience-details" data-reveal>
               <div className="eyebrow">La experiencia Equilibria Beauty</div>
               <h2 className="section-title" id="exp-title">Estética con <em>propósito.</em></h2>
               <p>El cuidado comienza con una valoración: conocer tu piel, identificar tus objetivos y elegir el enfoque estético más adecuado.</p>
@@ -268,15 +316,15 @@ export function BeautyLanding() {
         </section>
 
         <section className="manifesto" aria-label="Filosofía de marca">
-          <div className="wrap"><div className="eyebrow">El espíritu de Equilibria Beauty</div>
+          <div className="wrap" data-reveal><div className="eyebrow">El espíritu de Equilibria Beauty</div>
             <p className="quote">“La belleza no consiste en transformarte en otra persona, sino en <em>destacar lo mejor de ti.</em>”</p>
             <p>Estética · Precisión · Belleza</p>
           </div>
         </section>
 
         <section className="faq" aria-labelledby="faq-title"><div className="wrap faq-layout">
-          <div><div className="eyebrow">Antes de conocernos</div><h2 className="section-title" id="faq-title">Preguntas <em>frecuentes.</em></h2><p className="section-desc">Un primer espacio para resolver dudas antes de solicitar información.</p></div>
-          <div className="accordion">{faq.map(item => <details key={item.question}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
+          <div data-reveal><div className="eyebrow">Antes de conocernos</div><h2 className="section-title" id="faq-title">Preguntas <em>frecuentes.</em></h2><p className="section-desc">Un primer espacio para resolver dudas antes de solicitar información.</p></div>
+          <div className="accordion" data-reveal>{faq.map(item => <details key={item.question}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
         </div></section>
 
         <section className="contact-banner" id="contacto" aria-labelledby="contact-title">
@@ -284,7 +332,7 @@ export function BeautyLanding() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/beauty-identity.webp" alt="Concepto de Equilibria Beauty, logotipo dorado sobre una pared de tonos marfil" loading="lazy" />
           </div>
-          <div className="contact-text"><div className="eyebrow light">Tu momento comienza aquí</div><h2 className="section-title" id="contact-title">Reserva tu <em>valoración.</em></h2><p>Tu cuidado empieza con una valoración personalizada. Cuéntanos qué deseas mejorar o mantener.</p><button className="btn btn-gold" type="button" onClick={() => openAppointment()}>Solicitar una valoración <span className="arrow">↗</span></button></div>
+          <div className="contact-text" data-reveal><div className="eyebrow light">Tu momento comienza aquí</div><h2 className="section-title" id="contact-title">Reserva tu <em>valoración.</em></h2><p>Tu cuidado empieza con una valoración personalizada. Cuéntanos qué deseas mejorar o mantener.</p><button className="btn btn-gold" type="button" onClick={() => openAppointment()}>Solicitar una valoración <span className="arrow">↗</span></button></div>
         </section>
       </main>
 
