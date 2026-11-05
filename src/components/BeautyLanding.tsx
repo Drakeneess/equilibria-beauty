@@ -333,23 +333,7 @@ export function BeautyLanding() {
           </div>
         </section>
 
-        <section className="experience" id="experiencia" aria-labelledby="exp-title">
-          <div className="wrap experience-layout">
-            <div className="experience-visual">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/face-application.webp" alt="Aplicación de producto cosmético en un tratamiento estético facial" loading="lazy" />
-            </div>
-            <div className="experience-details" data-reveal>
-              <div className="eyebrow">La experiencia Equilibria Beauty</div>
-              <h2 className="section-title" id="exp-title">Estética con <em>propósito.</em></h2>
-              <p>El cuidado comienza con una cita personalizada para conocer tu piel, tus objetivos y las opciones estéticas más adecuadas.</p>
-              <div className="feature-grid">
-                <div className="feature"><span className="icon">✧</span><strong>Cita personalizada</strong><small>Cada piel tiene necesidades propias.</small></div>
-                <div className="feature"><span className="icon">❋</span><strong>Criterio estético</strong><small>Decisiones informadas sobre tu cuidado.</small></div>
-                <div className="feature"><span className="icon">◇</span><strong>Seguimiento</strong><small>Claridad en cada etapa del proceso.</small></div>
-              </div>
-            </div>
-          </div>
+        <section className="experience experience--media-only" id="experiencia" aria-label="La experiencia Equilibria Beauty">
           <ExperienceMedia />
         </section>
 

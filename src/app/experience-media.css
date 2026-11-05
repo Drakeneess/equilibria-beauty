@@ -129,3 +129,8 @@
 @media(prefers-reduced-motion:reduce) {
   .experience-media__switch button { transition: none; }
 }
+
+/* The original photo-and-copy experience panel has been removed. */
+.experience--media-only { padding: clamp(66px, 7vw, 106px) 0; }
+.experience--media-only .experience-media { margin: 0; }
+.experience--media-only .experience-media > .wrap { padding-top: 0; border-top: 0; }
