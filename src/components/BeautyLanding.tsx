@@ -432,15 +432,67 @@ export function BeautyLanding() {
         </section>
       </main>
 
-      <footer className="footer"><div className="wrap">
-        <div className="footer-grid">
-          <div className="footer-intro"><BrandMark placement="footer" /><p>Un espacio orientado al cuidado facial y corporal, la estética personalizada y la belleza natural.</p></div>
-          <div className="footer-col"><strong>Explorar</strong><a href="#tratamientos">Tratamientos</a><a href="#nosotros">Nuestra esencia</a><a href="#experiencia">La experiencia</a><a href="https://www.equilibria.cloud/" target="_blank" rel="noopener noreferrer">Equilibria institucional ↗</a></div>
-          <div className="footer-col"><strong>Ubicación y contacto</strong><span>{beautyContact.location}</span><span>{beautyContact.address}</span><a href={beautyContact.directionsUrl} target="_blank" rel="noopener noreferrer">Cómo llegar ↗</a><a href={beautyContact.telUrl}>{beautyContact.phoneDisplay}</a><a href={beautyContact.whatsappBaseUrl} target="_blank" rel="noopener noreferrer">WhatsApp ↗</a></div>
-          <div className="footer-col"><strong>Horarios</strong><span>{beautyContact.weekdays}</span><span>{beautyContact.saturday}</span><span>{beautyContact.sunday}</span><a href="#contacto">Consultas y citas</a><a href="#faq-title">Preguntas frecuentes</a></div>
+      <footer className="footer footer--beauty" aria-label="Información de Equilibria Beauty">
+        <div className="wrap">
+          <div className="footer-grid footer-grid--structured">
+            <div className="footer-intro footer-intro--beauty">
+              <BrandMark placement="footer" />
+              <p>Estética facial y corporal con una experiencia personalizada, cuidada en cada detalle.</p>
+              <span className="footer-specialty">BELLEZA · PRECISIÓN · CUIDADO</span>
+            </div>
+
+            <nav className="footer-col footer-nav" aria-label="Explorar Equilibria Beauty">
+              <h2 className="footer-heading">Explorar</h2>
+              <a href="#tratamientos">Tratamientos <span aria-hidden="true">→</span></a>
+              <a href="#nosotros">Nuestra esencia <span aria-hidden="true">→</span></a>
+              <a href="#experiencia">La experiencia <span aria-hidden="true">→</span></a>
+              <a href="#faq-title">Preguntas frecuentes <span aria-hidden="true">→</span></a>
+              <a href="https://www.equilibria.cloud/" target="_blank" rel="noopener noreferrer">Equilibria institucional <span aria-hidden="true">↗</span></a>
+            </nav>
+
+            <section className="footer-col footer-location" aria-labelledby="footer-location-title">
+              <h2 className="footer-heading" id="footer-location-title">Dónde estamos</h2>
+              <address className="footer-address">
+                <span className="footer-address__place">Torres Mall · La Paz</span>
+                <span>{beautyContact.location}</span>
+                <span>{beautyContact.address}</span>
+              </address>
+              <a className="footer-map-action" href={beautyContact.directionsUrl} target="_blank" rel="noopener noreferrer">
+                Ver ubicación <span aria-hidden="true">↗</span>
+              </a>
+            </section>
+
+            <section className="footer-col footer-hours" aria-labelledby="footer-hours-title">
+              <h2 className="footer-heading" id="footer-hours-title">Horarios</h2>
+              <div className="footer-hours__details">
+                <p>{beautyContact.weekdays}</p>
+                <p>{beautyContact.saturday}</p>
+                <p>{beautyContact.sunday}</p>
+              </div>
+            </section>
+          </div>
+
+          <div className="footer-contact-strip">
+            <div className="footer-contact-strip__copy">
+              <span>ATENCIÓN PERSONALIZADA</span>
+              <p>¿Tienes una consulta? Estamos para ayudarte a coordinar tu cita.</p>
+            </div>
+            <div className="footer-contact-strip__actions">
+              <a className="footer-action footer-action--primary" href={beautyContact.whatsappBaseUrl} target="_blank" rel="noopener noreferrer">
+                Consultar por WhatsApp <span aria-hidden="true">↗</span>
+              </a>
+              <a className="footer-action footer-action--secondary" href={beautyContact.telUrl}>
+                Llamar <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="footer-bottom">
+            <span>© 2026 Equilibria Beauty · Parte de Equilibria.</span>
+            <span>Servicios e imágenes ilustrativos. Las citas se confirman por WhatsApp.</span>
+          </div>
         </div>
-        <div className="footer-bottom"><span>© 2026 Equilibria Beauty · Parte de Equilibria.</span><span>Servicios e imágenes de tratamientos ilustrativos. Las citas se confirman por WhatsApp.</span></div>
-      </div></footer>
+      </footer>
 
       <div className={`modal${modalOpen ? " open" : ""}`} aria-hidden={!modalOpen} onMouseDown={event => { if (event.target === event.currentTarget) closeAppointment(); }}>
         {modalOpen && (
