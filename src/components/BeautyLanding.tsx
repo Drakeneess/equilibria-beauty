@@ -250,7 +250,7 @@ export function BeautyLanding() {
           <div className="hero-photo">
             {/* Imagen propia de la maqueta, sin recursos externos */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/hero-beauty.jpg" alt="Retrato editorial de estética facial y cuidado de la piel" fetchPriority="high" />
+            <img src="/images/hero-beauty-hd.webp" alt="Retrato editorial de estética facial y cuidado de la piel" width={1858} height={1690} fetchPriority="high" decoding="async" />
             <div className="hero-photo-credit">Equilibria Beauty<br />Tu belleza, tu esencia</div>
           </div>
         </section>
