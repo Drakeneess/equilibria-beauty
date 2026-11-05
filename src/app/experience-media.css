@@ -45,8 +45,10 @@
   background: transparent;
   color: #7d644c;
   cursor: pointer;
-  font: 600 12px/1.4 inherit;
   font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
   transition: color .26s ease, background-color .26s ease, box-shadow .26s ease;
 }
 .experience-media__switch button[aria-pressed="true"] {
