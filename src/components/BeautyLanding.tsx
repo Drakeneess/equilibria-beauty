@@ -224,8 +224,11 @@ export function BeautyLanding() {
     ].filter(Boolean).join("\n");
     const url = `${beautyContact.whatsappBaseUrl}?text=${encodeURIComponent(message)}`;
     // WhatsApp opens with a draft: the visitor must choose to send it.
-    const opened = window.open(url, "_blank", "noopener,noreferrer");
-    if (!opened) window.location.assign(url);
+    const link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.click();
   }
 
   return (
