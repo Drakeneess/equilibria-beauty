@@ -1,0 +1,139 @@
+/* Equilibria Beauty x Equilibria: shared identity, independent specialty.
+   Inspired by the institutional site's clear card-based navigation, not its treatment catalog. */
+.notice--family {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 3vw, 45px);
+  min-height: 35px;
+  padding: 8px 18px;
+}
+.notice--family a {
+  color: #e8c28f;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(232,194,143,.45);
+  padding-bottom: 2px;
+  transition: color .25s ease, border-color .25s ease;
+  white-space: nowrap;
+}
+.notice--family a:hover, .notice--family a:focus-visible {
+  color: #fff5dc;
+  border-color: #fff5dc;
+}
+.family-section {
+  padding: clamp(74px, 9vw, 128px) 0;
+  background: radial-gradient(ellipse 55% 75% at 100% 0, rgba(197,147,80,.14),transparent 78%),
+              linear-gradient(160deg,#f8f3ea 0%, #f2e7d9 100%);
+}
+.family-heading {
+  display: grid;
+  grid-template-columns: 1.28fr .72fr;
+  gap: clamp(30px, 5vw, 95px);
+  align-items: end;
+  margin-bottom: clamp(34px,5vw,63px);
+}
+.family-heading .section-title { margin-bottom: 0; }
+.family-heading__aside { border-left: 1px solid #b698765c; padding-left: 29px; }
+.family-heading__aside p { color: #725d4a; font-size: 13px; line-height: 1.95; margin: 0 0 20px; max-width: 370px; }
+.family-external {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  color: #8c602f;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  border-bottom: 1px solid #bd9868;
+  padding: 0 0 8px;
+  transition: gap .3s cubic-bezier(.22,1,.36,1), color .3s ease;
+}
+.family-external:hover, .family-external:focus-visible { color: #54351c; gap: 25px; }
+.family-values {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 14px;
+  align-items: start;
+}
+.family-value {
+  border-radius: 5px;
+  background: rgba(255,253,248,.65);
+  border: 1px solid rgba(148,104,60,.22);
+  box-shadow: 0 8px 30px rgba(63,43,28,.035);
+  overflow: hidden;
+  transition: background .35s ease, box-shadow .35s ease, transform .35s cubic-bezier(.22,1,.36,1);
+}
+.family-value:hover { transform: translateY(-3px); box-shadow: 0 13px 32px rgba(63,43,28,.095); }
+.family-value--expanded {
+  background: linear-gradient(140deg,#fffdf8 10%,#f4e8d6 100%);
+  box-shadow: 0 14px 42px rgba(63,43,28,.08);
+}
+.family-value__button {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  width: 100%;
+  min-height: 218px;
+  text-align: left;
+  background: transparent;
+  color: #3f2d20;
+  cursor: pointer;
+  border: 0;
+  padding: clamp(21px,3vw,33px);
+  font-family: inherit;
+}
+.family-value__number {
+  grid-column: 1 / -1;
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: #a17a4b;
+  align-self: start;
+}
+.family-value__title {
+  grid-column: 1 / -1;
+  margin-top: 28px;
+  font: 400 clamp(28px,3vw,39px)/1.2 var(--serif);
+}
+.family-value__intro {
+  grid-column: 1;
+  color: #796653;
+  font-size: 12px;
+  line-height: 1.7;
+  max-width: 280px;
+  align-self: end;
+  margin-top: 9px;
+}
+.family-value__toggle {
+  grid-column: 2;
+  align-self: end;
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #8b5f30;
+  background: #ead8be;
+  font-size: 20px;
+  line-height: 1;
+}
+.family-value__button:focus-visible { outline: 2px solid #ac7339; outline-offset: -5px; }
+.family-value__detail { border-top: 1px solid #c5ae895e; padding: 0 clamp(21px,3vw,33px) 25px; }
+.family-value__detail p { color: #725d4a; font-size: 12px; line-height: 1.85; margin: 22px 0 0; }
+@media(max-width:900px) {
+  .family-heading { grid-template-columns: 1fr; gap: 23px; }
+  .family-heading__aside { max-width: 610px; }
+  .family-values { gap: 10px; }
+  .family-value__button { padding: 23px 18px; }
+  .family-value__detail { padding: 0 18px 20px; }
+}
+@media(max-width:680px) {
+  .notice--family { gap: 8px; flex-direction: column; font-size: 8px; letter-spacing: .07em; }
+  .family-values { grid-template-columns: 1fr; }
+  .family-heading__aside { padding-left: 17px; }
+  .family-value__button { min-height: 154px; padding: 23px; }
+  .family-value__title { margin-top: 13px; }
+  .family-value__detail { padding: 0 23px 21px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .family-value, .family-external, .notice--family a { transition: none; }
+ .family-value:hover { transform: none; }
+}

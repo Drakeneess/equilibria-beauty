@@ -10,6 +10,27 @@ const filters: { id: "all" | TreatmentCategory; label: string }[] = [
   { id: "corporal", label: "Corporales" },
 ];
 
+const beautyValues = [
+  {
+    title: "Precisión",
+    number: "01",
+    intro: "Cada decisión comienza por comprender el objetivo.",
+    detail: "En Equilibria Beauty, la valoración y la información clara orientan el cuidado facial y corporal. Los tratamientos concretos se comunicarán cuando el catálogo oficial esté confirmado.",
+  },
+  {
+    title: "Personalización",
+    number: "02",
+    intro: "El mismo tratamiento no tiene por qué ser para todos.",
+    detail: "Buscamos una experiencia estética que atienda tus necesidades, expectativas y preferencias, sin prometer resultados universales ni sustituir una evaluación profesional.",
+  },
+  {
+    title: "Confianza",
+    number: "03",
+    intro: "La experiencia debe sentirse clara de principio a fin.",
+    detail: "Apostamos por comunicación sencilla, una atención cuidada y expectativas realistas. Esta página es una presentación conceptual hasta confirmar servicios y datos comerciales.",
+  },
+];
+
 const faq = [
   {
     question: "¿Cómo puedo elegir un tratamiento?",
@@ -33,6 +54,7 @@ export function BeautyLanding() {
   const menuRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const [filter, setFilter] = useState<"all" | TreatmentCategory>("all");
+  const [expandedValue, setExpandedValue] = useState<number | null>(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedTreatment, setSelectedTreatment] = useState("");
   const [submittedName, setSubmittedName] = useState("");
@@ -197,7 +219,7 @@ export function BeautyLanding() {
 
   return (
     <>
-      <div className="notice">Estética facial y corporal · Equilibria Beauty</div>
+      <div className="notice notice--family"><span>Estética facial y corporal · Equilibria Beauty</span><a href="https://www.equilibria.cloud/" target="_blank" rel="noopener noreferrer" aria-label="Conocer la web institucional de Equilibria (se abre en otra pestaña)">Conoce Equilibria <span aria-hidden="true">↗</span></a></div>
       <header className={`header${isScrolled ? " header--scrolled" : ""}`}>
         <div className="scroll-progress" aria-hidden="true" style={{ transform: `scaleX(${scrollProgress})` }} />
         <div className="wrap nav-shell">
@@ -322,6 +344,43 @@ export function BeautyLanding() {
           </div>
         </section>
 
+        <section className="family-section" aria-labelledby="family-title">
+          <div className="wrap">
+            <div className="family-heading" data-reveal>
+              <div className="family-heading__copy">
+                <div className="eyebrow">Una identidad compartida</div>
+                <h2 className="section-title" id="family-title">La esencia Equilibria.<br /><em>Una mirada a la belleza.</em></h2>
+              </div>
+              <div className="family-heading__aside">
+                <p>La marca Equilibria reúne distintas áreas de cuidado. Beauty mantiene una propuesta propia, especializada en estética facial y corporal.</p>
+                <a className="family-external" href="https://www.equilibria.cloud/" target="_blank" rel="noopener noreferrer">
+                  Explorar Equilibria <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
+            <div className="family-values" role="group" aria-label="Nuestro enfoque estético">
+              {beautyValues.map((item, index) => {
+                const expanded = expandedValue === index;
+                return (
+                  <article key={item.number} className={`family-value${expanded ? " family-value--expanded" : ""}`}>
+                    <button className="family-value__button" type="button"
+                      aria-expanded={expanded} aria-controls={`family-value-detail-${index}`}
+                      onClick={() => setExpandedValue(expanded ? null : index)}>
+                      <span className="family-value__number">{item.number} / 03</span>
+                      <span className="family-value__title">{item.title}</span>
+                      <span className="family-value__intro">{item.intro}</span>
+                      <span className="family-value__toggle" aria-hidden="true">{expanded ? "−" : "+"}</span>
+                    </button>
+                    <div id={`family-value-detail-${index}`} className="family-value__detail" hidden={!expanded}>
+                      <p>{item.detail}</p>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         <section className="faq" aria-labelledby="faq-title"><div className="wrap faq-layout">
           <div data-reveal><div className="eyebrow">Antes de conocernos</div><h2 className="section-title" id="faq-title">Preguntas <em>frecuentes.</em></h2><p className="section-desc">Un primer espacio para resolver dudas antes de solicitar información.</p></div>
           <div className="accordion" data-reveal>{faq.map(item => <details key={item.question}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
@@ -340,7 +399,7 @@ export function BeautyLanding() {
         <div className="footer-grid">
           <div className="footer-intro"><BrandMark placement="footer" /><p>Un espacio orientado al cuidado facial y corporal, la estética personalizada y la belleza natural.</p></div>
           <div className="footer-col"><strong>Explorar</strong><a href="#tratamientos">Tratamientos</a><a href="#nosotros">Nuestra esencia</a><a href="#experiencia">La experiencia</a></div>
-          <div className="footer-col"><strong>Información</strong><a href="#contacto">Consultas y reservas</a><a href="#faq-title">Preguntas frecuentes</a><span>Datos comerciales: por confirmar</span></div>
+          <div className="footer-col"><strong>Información</strong><a href="#contacto">Consultas y reservas</a><a href="#faq-title">Preguntas frecuentes</a><a href="https://www.equilibria.cloud/" target="_blank" rel="noopener noreferrer">Equilibria institucional ↗</a><span>Datos comerciales de Beauty: por confirmar</span></div>
         </div>
         <div className="footer-bottom"><span>© 2026 Equilibria Beauty · Maqueta conceptual, no sitio publicado.</span><span>Las imágenes y servicios son ilustrativos. El formulario no envía datos.</span></div>
       </div></footer>

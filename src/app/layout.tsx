@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "./premium-motion.css";
+import "./brand-family.css";
 
 export const metadata: Metadata = {
   title: "Equilibria Beauty — Belleza en equilibrio",
