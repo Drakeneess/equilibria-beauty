@@ -12,27 +12,6 @@ const filters: { id: "all" | TreatmentCategory; label: string }[] = [
   { id: "corporal", label: "Corporales" },
 ];
 
-const beautyValues = [
-  {
-    title: "Precisión",
-    number: "01",
-    intro: "Cada decisión comienza por comprender el objetivo.",
-    detail: "En Equilibria Beauty, la primera cita y la información clara orientan el cuidado facial y corporal. Los tratamientos concretos se comunicarán cuando el catálogo oficial esté confirmado.",
-  },
-  {
-    title: "Personalización",
-    number: "02",
-    intro: "El mismo tratamiento no tiene por qué ser para todos.",
-    detail: "Buscamos una experiencia estética que atienda tus necesidades, expectativas y preferencias, sin prometer resultados universales ni sustituir una evaluación profesional.",
-  },
-  {
-    title: "Confianza",
-    number: "03",
-    intro: "La experiencia debe sentirse clara de principio a fin.",
-    detail: "Apostamos por comunicación sencilla, una atención cuidada y expectativas realistas. Los tratamientos ilustrativos de esta página se actualizarán cuando esté confirmado el catálogo oficial.",
-  },
-];
-
 const faq = [
   {
     question: "¿Cómo puedo elegir un tratamiento?",
@@ -60,7 +39,6 @@ export function BeautyLanding() {
   const menuRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const [filter, setFilter] = useState<"all" | TreatmentCategory>("all");
-  const [expandedValue, setExpandedValue] = useState<number | null>(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedTreatment, setSelectedTreatment] = useState("");
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -346,37 +324,46 @@ export function BeautyLanding() {
 
         <section className="family-section" aria-labelledby="family-title">
           <div className="wrap">
-            <div className="family-heading" data-reveal>
-              <div className="family-heading__copy">
-                <div className="eyebrow">Una identidad compartida</div>
-                <h2 className="section-title" id="family-title">La esencia Equilibria.<br /><em>Una mirada a la belleza.</em></h2>
-              </div>
-              <div className="family-heading__aside">
-                <p>La marca Equilibria reúne distintas áreas de cuidado. Beauty mantiene una propuesta propia, especializada en estética facial y corporal.</p>
-                <a className="family-external" href="https://www.equilibria.cloud/" target="_blank" rel="noopener noreferrer">
-                  Explorar Equilibria <span aria-hidden="true">↗</span>
+            <div className="institutional-hero">
+              <div className="institutional-hero__copy" data-reveal>
+                <span className="institutional-hero__kicker"><span className="institutional-hero__kicker-rule" /> Una marca, distintas formas de cuidarte</span>
+                <h2 id="family-title">Conoce <em>Equilibria.</em></h2>
+                <p className="institutional-hero__lead">Beauty es parte de una visión más amplia del cuidado y el bienestar.</p>
+                <p className="institutional-hero__description">
+                  En la página institucional de Equilibria descubrirás sus servicios de fisioterapia,
+                  kinesiología y bienestar, además de su equipo profesional y tecnología.
+                </p>
+                <a
+                  className="institutional-hero__cta"
+                  href="https://www.equilibria.cloud/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visitar la página institucional de Equilibria en una nueva pestaña"
+                >
+                  Visitar la página de Equilibria <span aria-hidden="true">↗</span>
                 </a>
+                <span className="institutional-hero__domain">www.equilibria.cloud</span>
               </div>
-            </div>
-            <div className="family-values" role="group" aria-label="Nuestro enfoque estético">
-              {beautyValues.map((item, index) => {
-                const expanded = expandedValue === index;
-                return (
-                  <article key={item.number} className={`family-value${expanded ? " family-value--expanded" : ""}`}>
-                    <button className="family-value__button" type="button"
-                      aria-expanded={expanded} aria-controls={`family-value-detail-${index}`}
-                      onClick={() => setExpandedValue(expanded ? null : index)}>
-                      <span className="family-value__number">{item.number} / 03</span>
-                      <span className="family-value__title">{item.title}</span>
-                      <span className="family-value__intro">{item.intro}</span>
-                      <span className="family-value__toggle" aria-hidden="true">{expanded ? "−" : "+"}</span>
-                    </button>
-                    <div id={`family-value-detail-${index}`} className="family-value__detail" hidden={!expanded}>
-                      <p>{item.detail}</p>
-                    </div>
-                  </article>
-                );
-              })}
+
+              <a
+                className="institutional-hero__visual"
+                href="https://www.equilibria.cloud/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Explorar la página institucional Equilibria: fisioterapia, kinesiología y bienestar"
+              >
+                <span className="institutional-hero__ambient" aria-hidden="true" />
+                <span className="institutional-hero__visual-top">CENTRO EQUILIBRIA <span aria-hidden="true">↗</span></span>
+                <span className="institutional-hero__visual-center">
+                  <span className="institutional-hero__orbit" aria-hidden="true"><span /></span>
+                  <strong>Equilibria</strong>
+                  <span className="institutional-hero__tagline">Bienestar a tu alcance</span>
+                </span>
+                <span className="institutional-hero__visual-bottom">
+                  <span>FISIOTERAPIA <span aria-hidden="true">·</span> KINESIOLOGÍA <span aria-hidden="true">·</span> BIENESTAR</span>
+                  <span className="institutional-hero__visual-action">Conocer el centro <span aria-hidden="true">↗</span></span>
+                </span>
+              </a>
             </div>
           </div>
         </section>
