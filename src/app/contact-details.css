@@ -1,0 +1,39 @@
+/* Confirmed Equilibria contact details; beauty-specific consultation channel. */
+.contact-text--live { padding-top: clamp(42px, 5vw, 72px); padding-bottom: clamp(42px, 5vw, 72px); }
+.contact-text--live .section-title { font-size: clamp(37px, 4vw, 62px); }
+.contact-text--live > p { max-width: 455px; }
+.contact-facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 18px 25px;
+  margin: 0 0 27px;
+  padding-top: 21px;
+  border-top: 1px solid rgba(233,193,140,.32);
+  width: 100%;
+  max-width: 630px;
+}
+.contact-fact { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; color: #e7d7c3; font-size: 11px; line-height: 1.65; }
+.contact-fact__label { font-size: 9px; text-transform: uppercase; font-weight: 700; letter-spacing: .18em; color: #e9be7c; margin-bottom: 5px; }
+.contact-fact__label--hours { margin-top: 11px; }
+.contact-fact address { font-style: normal; line-height: 1.75; }
+.contact-fact address span { display: block; }
+.contact-fact a, .contact-direct { color: #f1cc96; text-decoration: underline; text-decoration-color: rgba(241,204,150,.42); text-underline-offset: 4px; transition: color .2s ease, text-decoration-color .2s ease; }
+.contact-fact a:hover, .contact-direct:hover, .contact-fact a:focus-visible, .contact-direct:focus-visible { color: #fff1ce; text-decoration-color: currentColor; }
+.contact-fact__phone { font-size: 16px; font-weight: 500; }
+.contact-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 21px; }
+.contact-actions .btn { white-space: normal; text-align: center; }
+.contact-direct { font-size: 11px; line-height: 1.7; }
+.footer-grid { grid-template-columns: minmax(0,1.35fr) minmax(0,.75fr) minmax(0,1.1fr) minmax(0,.85fr); gap: clamp(20px,3.5vw,56px); }
+.footer-col span { line-height: 1.7; }
+@media(max-width:1050px) {
+  .contact-facts { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:560px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .contact-facts { padding-top: 19px; }
+  .contact-actions .btn { width: 100%; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .contact-fact a, .contact-direct { transition:none; }
+}

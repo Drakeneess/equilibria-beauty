@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent, type PointerEvent as ReactPointerEvent } from "react";
 import { BrandMark } from "./BrandMark";
 import { treatments, type TreatmentCategory } from "@/data/treatments";
+import { beautyContact } from "@/data/contact";
 
 const filters: { id: "all" | TreatmentCategory; label: string }[] = [
   { id: "all", label: "Todos" },
@@ -27,22 +28,26 @@ const beautyValues = [
     title: "Confianza",
     number: "03",
     intro: "La experiencia debe sentirse clara de principio a fin.",
-    detail: "Apostamos por comunicación sencilla, una atención cuidada y expectativas realistas. Esta página es una presentación conceptual hasta confirmar servicios y datos comerciales.",
+    detail: "Apostamos por comunicación sencilla, una atención cuidada y expectativas realistas. Los tratamientos ilustrativos de esta página se actualizarán cuando esté confirmado el catálogo oficial.",
   },
 ];
 
 const faq = [
   {
     question: "¿Cómo puedo elegir un tratamiento?",
-    answer: "La valoración inicial permite conversar sobre tus objetivos y conocer tu piel. El catálogo de procedimientos específicos se incorporará una vez confirmado.",
+    answer: "Puedes contarnos tus objetivos al solicitar una consulta. Los servicios que aparecen en esta página son ilustrativos y su disponibilidad debe confirmarse directamente con el equipo.",
   },
   {
-    question: "¿Cómo realizo una reserva?",
-    answer: "En esta maqueta, el formulario de reserva es demostrativo. No envía información. La agenda real se podrá conectar a WhatsApp, un calendario o un sistema de reservas.",
+    question: "¿Cómo solicito una cita?",
+    answer: "Completa el formulario de consulta y se abrirá WhatsApp con un mensaje preparado para Equilibria. Debes enviarlo desde WhatsApp y esperar la confirmación del equipo; la cita no se reserva automáticamente.",
   },
   {
     question: "¿Dónde se encuentra Equilibria Beauty?",
-    answer: "La ubicación y los horarios oficiales se incorporarán cuando estén disponibles. No se han colocado datos ficticios.",
+    answer: "La atención se coordina en Torres Mall, Torre B, piso 4, oficina 405, frente a la plaza Isabel la Católica, en La Paz.",
+  },
+  {
+    question: "¿Cuáles son los horarios de atención?",
+    answer: "Lunes a viernes de 09:00 a 19:00, sábados de 09:00 a 13:00 y domingos cerrado.",
   },
 ];
 
@@ -57,8 +62,6 @@ export function BeautyLanding() {
   const [expandedValue, setExpandedValue] = useState<number | null>(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedTreatment, setSelectedTreatment] = useState("");
-  const [submittedName, setSubmittedName] = useState("");
-  const [submittedTreatment, setSubmittedTreatment] = useState("");
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
@@ -167,8 +170,6 @@ export function BeautyLanding() {
   function openAppointment(service = "") {
     triggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setSelectedTreatment(service);
-    setSubmittedName("");
-    setSubmittedTreatment("");
     setModalOpen(true);
   }
 
@@ -212,9 +213,19 @@ export function BeautyLanding() {
     event.preventDefault();
     const form = event.currentTarget;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value.trim();
+    const inquiry = (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim();
     if (!name || !selectedTreatment) return;
-    setSubmittedName(name);
-    setSubmittedTreatment(selectedTreatment);
+    const message = [
+      "Hola, quisiera consultar con Equilibria Beauty.",
+      `Mi nombre es: ${name}.`,
+      `Me interesa: ${selectedTreatment}.`,
+      inquiry ? `Consulta: ${inquiry}` : "",
+      "¿Podrían indicarme disponibilidad y cómo coordinar una cita?",
+    ].filter(Boolean).join("\n");
+    const url = `${beautyContact.whatsappBaseUrl}?text=${encodeURIComponent(message)}`;
+    // WhatsApp opens with a draft: the visitor must choose to send it.
+    const opened = window.open(url, "_blank", "noopener,noreferrer");
+    if (!opened) window.location.assign(url);
   }
 
   return (
@@ -231,7 +242,7 @@ export function BeautyLanding() {
             ].map(([url, label]) => <a key={url} href={url} aria-current={activeSection === url.slice(1) ? "location" : undefined} onClick={() => setMenuOpen(false)}>{label}</a>)}
           </nav>
           <div className="nav-actions">
-            <button className="btn btn-gold" type="button" onClick={() => openAppointment()}>◷ &nbsp; Reservar</button>
+            <button className="btn btn-gold" type="button" onClick={() => openAppointment()}>◷ &nbsp; Consultar</button>
             <button className="menu-button" type="button" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={menuOpen} aria-controls="navigation" ref={menuButtonRef} onClick={() => setMenuOpen(v => !v)}>
               {menuOpen ? "×" : "☰"}
@@ -249,7 +260,7 @@ export function BeautyLanding() {
             <div className="rule" />
             <p className="hero-p">Tratamientos estéticos enfocados en el cuidado de la piel, la imagen personal y una atención hecha a tu medida.</p>
             <div className="hero-buttons">
-              <button className="btn btn-gold" type="button" onClick={() => openAppointment()}>◷ &nbsp; Reserva tu valoración</button>
+              <button className="btn btn-gold" type="button" onClick={() => openAppointment()}>◷ &nbsp; Solicitar valoración</button>
               <a className="btn btn-outline" href="#tratamientos">Ver tratamientos <span className="arrow">↗</span></a>
             </div>
             <div className="hero-details"><span>Estética facial</span><span className="dot" /><span>Estética corporal</span><span className="dot" /><span>Cuidado de la piel</span></div>
@@ -391,17 +402,41 @@ export function BeautyLanding() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/beauty-identity.webp" alt="Concepto de Equilibria Beauty, logotipo dorado sobre una pared de tonos marfil" loading="lazy" />
           </div>
-          <div className="contact-text" data-reveal><div className="eyebrow light">Tu momento comienza aquí</div><h2 className="section-title" id="contact-title">Reserva tu <em>valoración.</em></h2><p>Tu cuidado empieza con una valoración personalizada. Cuéntanos qué deseas mejorar o mantener.</p><button className="btn btn-gold" type="button" onClick={() => openAppointment()}>Solicitar una valoración <span className="arrow">↗</span></button></div>
+          <div className="contact-text contact-text--live" data-reveal>
+            <div className="eyebrow light">Estamos para atenderte</div>
+            <h2 className="section-title" id="contact-title">Tu próxima <em>consulta.</em></h2>
+            <p>Consulta sobre estética facial y corporal por el WhatsApp de Equilibria. El equipo te ayudará a coordinar una cita.</p>
+            <div className="contact-facts">
+              <div className="contact-fact">
+                <span className="contact-fact__label">Visítanos en La Paz</span>
+                <address>{beautyContact.location}<span>{beautyContact.address}</span></address>
+                <a href={beautyContact.directionsUrl} target="_blank" rel="noopener noreferrer">Cómo llegar <span aria-hidden="true">↗</span></a>
+              </div>
+              <div className="contact-fact">
+                <span className="contact-fact__label">Contacto</span>
+                <a className="contact-fact__phone" href={beautyContact.telUrl}>{beautyContact.phoneDisplay}</a>
+                <span className="contact-fact__label contact-fact__label--hours">Horarios de atención</span>
+                <span>{beautyContact.weekdays}</span>
+                <span>{beautyContact.saturday}</span>
+                <span>{beautyContact.sunday}</span>
+              </div>
+            </div>
+            <div className="contact-actions">
+              <button className="btn btn-gold" type="button" onClick={() => openAppointment()}>Preparar consulta por WhatsApp <span className="arrow">↗</span></button>
+              <a className="contact-direct" href={beautyContact.whatsappBaseUrl} target="_blank" rel="noopener noreferrer">Abrir WhatsApp directamente</a>
+            </div>
+          </div>
         </section>
       </main>
 
       <footer className="footer"><div className="wrap">
         <div className="footer-grid">
           <div className="footer-intro"><BrandMark placement="footer" /><p>Un espacio orientado al cuidado facial y corporal, la estética personalizada y la belleza natural.</p></div>
-          <div className="footer-col"><strong>Explorar</strong><a href="#tratamientos">Tratamientos</a><a href="#nosotros">Nuestra esencia</a><a href="#experiencia">La experiencia</a></div>
-          <div className="footer-col"><strong>Información</strong><a href="#contacto">Consultas y reservas</a><a href="#faq-title">Preguntas frecuentes</a><a href="https://www.equilibria.cloud/" target="_blank" rel="noopener noreferrer">Equilibria institucional ↗</a><span>Datos comerciales de Beauty: por confirmar</span></div>
+          <div className="footer-col"><strong>Explorar</strong><a href="#tratamientos">Tratamientos</a><a href="#nosotros">Nuestra esencia</a><a href="#experiencia">La experiencia</a><a href="https://www.equilibria.cloud/" target="_blank" rel="noopener noreferrer">Equilibria institucional ↗</a></div>
+          <div className="footer-col"><strong>Ubicación y contacto</strong><span>{beautyContact.location}</span><span>{beautyContact.address}</span><a href={beautyContact.directionsUrl} target="_blank" rel="noopener noreferrer">Cómo llegar ↗</a><a href={beautyContact.telUrl}>{beautyContact.phoneDisplay}</a><a href={beautyContact.whatsappBaseUrl} target="_blank" rel="noopener noreferrer">WhatsApp ↗</a></div>
+          <div className="footer-col"><strong>Horarios</strong><span>{beautyContact.weekdays}</span><span>{beautyContact.saturday}</span><span>{beautyContact.sunday}</span><a href="#contacto">Consultas y citas</a><a href="#faq-title">Preguntas frecuentes</a></div>
         </div>
-        <div className="footer-bottom"><span>© 2026 Equilibria Beauty · Maqueta conceptual, no sitio publicado.</span><span>Las imágenes y servicios son ilustrativos. El formulario no envía datos.</span></div>
+        <div className="footer-bottom"><span>© 2026 Equilibria Beauty · Parte de Equilibria.</span><span>Servicios e imágenes de tratamientos ilustrativos. Las citas se confirman por WhatsApp.</span></div>
       </div></footer>
 
       <div className={`modal${modalOpen ? " open" : ""}`} aria-hidden={!modalOpen} onMouseDown={event => { if (event.target === event.currentTarget) closeAppointment(); }}>
@@ -410,18 +445,17 @@ export function BeautyLanding() {
             <button className="close" type="button" aria-label="Cerrar ventana" onClick={closeAppointment} ref={closeButtonRef}>×</button>
             <div className="eyebrow">Equilibria Beauty</div>
             <h2 id="modal-heading">Tu momento comienza aquí.</h2>
-            <p>Déjanos una idea de lo que buscas. Este formulario es solo una demostración interactiva: no enviará ni guardará tus datos.</p>
+            <p>Completa estos datos para preparar un mensaje dirigido al WhatsApp de Equilibria. Podrás revisarlo y enviarlo desde WhatsApp; esto no confirma una cita.</p>
             <form onSubmit={handleSubmit}>
               <div className="field"><label htmlFor="full-name">Nombre</label><input id="full-name" name="name" type="text" required maxLength={80} autoComplete="name" placeholder="Tu nombre" /></div>
-              <div className="field"><label htmlFor="interest">Tratamiento de interés</label><select id="interest" required value={selectedTreatment} onChange={event => setSelectedTreatment(event.target.value)}>
+              <div className="field"><label htmlFor="interest">Tratamiento o motivo de consulta (orientativo)</label><select id="interest" required value={selectedTreatment} onChange={event => setSelectedTreatment(event.target.value)}>
                 <option value="">Selecciona una opción</option>
                 {treatments.map(t => <option key={t.id} value={t.title}>{t.title}</option>)}
                 <option value="Consulta general de estética">Consulta general de estética</option>
               </select></div>
               <div className="field"><label htmlFor="message">¿Qué te gustaría consultar? (opcional)</label><textarea id="message" name="message" rows={3} placeholder="Cuéntanos brevemente qué buscas" /></div>
-              <button className="btn btn-dark" type="submit">Continuar <span className="arrow">↗</span></button>
-              <div className="preview-alert">Vista previa: al publicar la web, este módulo deberá conectarse al canal oficial de reservas.</div>
-              <div className={`result${submittedName ? " visible" : ""}`} role="status" aria-live="polite">{submittedName && `Demostración completada, ${submittedName}. Tu interés en «${submittedTreatment}» se mostraría al equipo de Equilibria Beauty tras integrar el sistema real. Por ahora no se ha enviado ni almacenado información.`}</div>
+              <button className="btn btn-dark" type="submit">Continuar en WhatsApp <span className="arrow">↗</span></button>
+              <div className="preview-alert">Se abrirá WhatsApp con un mensaje preparado para {beautyContact.phoneDisplay}. Debes pulsar enviar allí; el formulario no guarda datos ni reserva una cita automáticamente.</div>
             </form>
           </div>
         )}
