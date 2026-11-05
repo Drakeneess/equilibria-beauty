@@ -215,3 +215,50 @@
   .footer--beauty .footer-nav a, .footer--beauty .footer-map-action, .footer--beauty .footer-action { transition: none; }
   .footer--beauty .footer-map-action:hover, .footer--beauty .footer-action:hover { transform: none; }
 }
+
+/* Social channels belong to Equilibria institutional, not necessarily Beauty-only. */
+.footer--beauty .footer-socials { margin-top: 23px; }
+.footer--beauty .footer-socials__title {
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: #d9b587;
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+.footer--beauty .footer-socials__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footer--beauty .footer-socials__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 11px;
+  min-height: 38px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #f1ddbf;
+  text-decoration: none;
+  border: 1px solid rgba(225,183,129,.46);
+  border-radius: 6px;
+  background: rgba(228,187,128,.065);
+  transition: border-color .25s ease, background .25s ease, color .25s ease;
+}
+.footer--beauty .footer-socials__links a span {
+  font-size: 12px;
+  margin: 0;
+  color: #e2b779;
+}
+.footer--beauty .footer-socials__links a:hover,
+.footer--beauty .footer-socials__links a:focus-visible {
+  color: #fff7e6;
+  border-color: #e9c38e;
+  background: rgba(228,187,128,.16);
+}
+@media(prefers-reduced-motion:reduce) {
+  .footer--beauty .footer-socials__links a { transition: none; }
+}
