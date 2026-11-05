@@ -79,7 +79,14 @@
   font-style: normal;
   color: #d2c1af;
 }
-.footer-address__place {
+.footer--beauty .footer-address > span {
+  display: block;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.85;
+  color: #d2c1af;
+}
+.footer--beauty .footer-address > .footer-address__place {
   font-weight: 700;
   color: #f2e3cf;
   font-size: 13px;
