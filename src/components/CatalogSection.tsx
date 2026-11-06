@@ -50,9 +50,9 @@ export function CatalogSection({onConsult}:{onConsult:(packageName:string)=>void
           <h2 className="section-title" id="services-title">El arte de <em>cuidarte.</em></h2>
           <p className="section-desc">Descubre nuestros paquetes faciales y corporales, conoce qué incluye cada uno y consulta cómo comenzar.</p>
           <div className="catalog-overview">
-            <span><strong>12</strong> faciales</span><span className="catalog-overview__divider" aria-hidden="true" />
-            <span><strong>11</strong> corporales</span><span className="catalog-overview__divider" aria-hidden="true" />
-            <span><strong>23</strong> paquetes</span>
+            <span><strong>{numberIn("facial")}</strong> faciales</span><span className="catalog-overview__divider" aria-hidden="true" />
+            <span><strong>{numberIn("corporal")}</strong> corporales</span><span className="catalog-overview__divider" aria-hidden="true" />
+            <span><strong>{numberIn("all")}</strong> paquetes</span>
           </div>
         </div>
 
