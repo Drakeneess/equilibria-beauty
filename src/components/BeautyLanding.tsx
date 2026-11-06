@@ -238,7 +238,7 @@ export function BeautyLanding() {
           <div className="hero-copy">
             <span className="hero-glow" aria-hidden="true" />
             <div className="eyebrow light"><span className="tiny-rule" />Estética facial &amp; corporal</div>
-            <h1 id="hero-title">Belleza en <em>equilibrio.</em></h1>
+            <h1 id="hero-title">Belleza en <em>Equilibrio.</em></h1>
             <div className="rule" />
             <p className="hero-p">Tratamientos estéticos enfocados en el cuidado de la piel, la imagen personal y una atención hecha a tu medida.</p>
             <div className="hero-buttons">

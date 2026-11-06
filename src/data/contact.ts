@@ -17,7 +17,7 @@ export const beautyContact = {
  * No identificarlos como cuentas exclusivas de Equilibria Beauty.
  */
 export const institutionalSocials = [
-  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/equilibria.fisio" },
+  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/equilibria.beauty.b0/" },
   { id: "facebook", label: "Facebook", href: "https://www.facebook.com/profile.php?id=100091824191811" },
   { id: "tiktok", label: "TikTok", href: "https://www.tiktok.com/@equilibria_fisioterapia" },
 ] as const;

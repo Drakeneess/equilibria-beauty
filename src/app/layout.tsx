@@ -7,7 +7,7 @@ import "./footer.css";
 import "./experience-media.css";
 
 export const metadata: Metadata = {
-  title: "Equilibria Beauty — Belleza en equilibrio",
+  title: "Equilibria Beauty — Belleza en Equilibrio",
   description: "Equilibria Beauty: estética facial y corporal, cuidado de la piel y atención personalizada.",
   robots: { index: false, follow: false }, // Proyecto demo. Activar indexación al publicar.
 };
