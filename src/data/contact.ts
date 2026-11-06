@@ -18,6 +18,6 @@ export const beautyContact = {
  */
 export const institutionalSocials = [
   { id: "instagram", label: "Instagram", href: "https://www.instagram.com/equilibria.beauty.b0/" },
-  { id: "facebook", label: "Facebook", href: "https://www.facebook.com/profile.php?id=100091824191811" },
-  { id: "tiktok", label: "TikTok", href: "https://www.tiktok.com/@equilibria_fisioterapia" },
+  { id: "facebook", label: "Facebook", href: "https://www.facebook.com/profile.php?id=61596073720732" },
+  { id: "tiktok", label: "TikTok", href: "https://www.tiktok.com/@equilibria.beauty" },
 ] as const;
