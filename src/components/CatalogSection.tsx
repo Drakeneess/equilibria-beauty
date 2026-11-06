@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { publishedBeautyPackages, type CatalogPackage, type CatalogCategory } from "@/data/catalog";
+import { getCatalogImage } from "@/data/catalog/media";
 
 type Category = "all" | CatalogCategory;
 type Order = "catalog" | "price-asc" | "price-desc";
@@ -89,6 +90,17 @@ export function CatalogSection({onConsult}:{onConsult:(packageName:string)=>void
           <div className="catalog-grid">
             {shown.map((item,index)=>(
               <article key={item.id} className="catalog-card" aria-labelledby={"catalog-title-"+item.id}>
+                <div className="catalog-card__image">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={getCatalogImage(item).src}
+                    alt={getCatalogImage(item).alt}
+                    width={672}
+                    height={448}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
                 <div className="catalog-card__top">
                   <span className="catalog-card__number">{String(index+1).padStart(2,"0")}</span>
                   <span className={"catalog-card__category catalog-card__category--"+item.category}>

@@ -37,3 +37,13 @@ const packageDetail = getCatalogPackageById("beauty-facial-ritual-de-loto");
 6. Decidir posteriormente si el backend contendrá entidades `catalog_items`, `package_inclusions`, `session_breakdown` y `prices`, conservando estos IDs.
 
 Los 23 registros se publican con `publicationStatus: "published"` por decisión del equipo. En la web figura el aviso de confirmar precios y disponibilidad. Se mantiene la consulta por WhatsApp sin reserva automática.
+
+
+## Fotografías del catálogo
+- Se incorporaron **23 fotos específicas**, una por paquete, desde los PDF proporcionados.
+- Archivos WebP locales: `public/images/catalog/beauty-*.webp`. Relación estable por ID en `src/data/catalog/media.ts`.
+- Resolución de exportación: **672 × 448 px**, optimizada para tarjetas. Peso total aproximado: **392 KB**.
+- No se utilizaron imágenes externas ni se generaron fotografías para reemplazar el contenido original.
+- La interfaz tiene un fallback para futuros paquetes sin imagen asignada.
+- **Licencias:** el material fuente incluye fotografías que podrían ser de bancos de imágenes. Confirmar el permiso de reutilización comercial de esas fotografías antes del lanzamiento público.
+- Si se cambia un archivo, conservar el ID en su nombre o actualizar la asignación `getCatalogImage`.
