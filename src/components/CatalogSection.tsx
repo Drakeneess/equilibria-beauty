@@ -163,8 +163,8 @@ export function CatalogSection({onConsult}:{onConsult:(packageName:string)=>void
           </div>
         )}
         <p className="catalog-disclaimer">
-          Precios y procedimientos basados en los catálogos facilitados. Confirma su vigencia,
-          disponibilidad y número de citas con el equipo antes de reservar.
+          Precios y procedimientos basados en los catálogos facilitados. Imágenes ilustrativas, no fotografías
+          de resultados reales. Confirma vigencia, disponibilidad y número de citas antes de reservar.
         </p>
       </div>
     </section>
