@@ -6,6 +6,10 @@ import { publishedBeautyPackages } from "@/data/catalog";
 import { CatalogSection } from "./CatalogSection";
 import { beautyContact, institutionalSocials } from "@/data/contact";
 import { ExperienceMedia } from "./ExperienceMedia";
+import { experienceVideos } from "@/data/experience";
+
+// Oculta toda la sección (y sus enlaces) hasta que se cargue al menos un video.
+const showExperienceSection = experienceVideos.length > 0;
 
 const faq = [
   {
@@ -87,7 +91,7 @@ export function BeautyLanding() {
   }, []);
 
   useEffect(() => {
-    const sectionIds = ["inicio", "tratamientos", "nosotros", "experiencia", "contacto"];
+    const sectionIds = ["inicio", "tratamientos", "nosotros", ...(showExperienceSection ? ["experiencia"] : []), "contacto"];
     let frame = 0;
 
     function updateScrollState() {
@@ -214,7 +218,9 @@ export function BeautyLanding() {
           <nav className={`nav-links${menuOpen ? " open" : ""}`} id="navigation" aria-label="Navegación principal" ref={menuRef}>
             {[
               ["#inicio", "Inicio"], ["#tratamientos", "Tratamientos"],
-              ["#nosotros", "Nosotros"], ["#experiencia", "Experiencia"], ["#contacto", "Contacto"],
+              ["#nosotros", "Nosotros"],
+              ...(showExperienceSection ? [["#experiencia", "Experiencia"]] : []),
+              ["#contacto", "Contacto"],
             ].map(([url, label]) => <a key={url} href={url} aria-current={activeSection === url.slice(1) ? "location" : undefined} onClick={() => setMenuOpen(false)}>{label}</a>)}
           </nav>
           <div className="nav-actions">
@@ -272,9 +278,11 @@ export function BeautyLanding() {
           </div>
         </section>
 
-        <section className="experience experience--media-only" id="experiencia" aria-label="La experiencia Equilibria Beauty">
-          <ExperienceMedia />
-        </section>
+        {showExperienceSection && (
+          <section className="experience experience--media-only" id="experiencia" aria-label="La experiencia Equilibria Beauty">
+            <ExperienceMedia />
+          </section>
+        )}
 
         <section className="manifesto" aria-label="Filosofía de marca">
           <div className="wrap" data-reveal><div className="eyebrow">El espíritu de Equilibria Beauty</div>
@@ -388,7 +396,7 @@ export function BeautyLanding() {
               <h2 className="footer-heading">Explorar</h2>
               <a href="#tratamientos">Tratamientos <span aria-hidden="true">→</span></a>
               <a href="#nosotros">Nuestra esencia <span aria-hidden="true">→</span></a>
-              <a href="#experiencia">La experiencia <span aria-hidden="true">→</span></a>
+              {showExperienceSection && <a href="#experiencia">La experiencia <span aria-hidden="true">→</span></a>}
               <a href="#faq-title">Preguntas frecuentes <span aria-hidden="true">→</span></a>
               <a href="https://www.equilibria.cloud/" target="_blank" rel="noopener noreferrer">Equilibria institucional <span aria-hidden="true">↗</span></a>
             </nav>

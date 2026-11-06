@@ -54,5 +54,5 @@ Para mostrar opiniones verificadas, añadir elementos con `approved: true` y `co
 ```
 
 Usar solo contenido auténtico, con derechos de publicación. No añadir citas ni videos ficticios.
-Los estados vacíos son intencionales: desaparecen en cuanto haya material configurado.
+La sección «Historias y experiencias» **no se renderiza** y sus enlaces desaparecen del navbar y del footer mientras `experienceVideos` esté vacío. Al añadir al menos un video, reaparece automáticamente la sección en la siguiente compilación/publicación. Los comentarios siguen siendo opcionales y necesitan aprobación explícita.
 Para recibir comentarios directamente de visitantes se necesitará un sistema de autenticación/moderación, almacenamiento y avisos de privacidad.
