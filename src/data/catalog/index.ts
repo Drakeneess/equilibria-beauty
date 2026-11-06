@@ -5,7 +5,7 @@ import { corporalPackages } from "./corporals";
 export type { BusinessUnit, CatalogCategory, CatalogPackage } from "./types";
 export { facialPackages, corporalPackages };
 
-/** Fuente estática. Todavía no consumida por la interfaz, API o base de datos. */
+/** Catálogo consumido por la web, preparado para API o backend futuros. */
 export const catalogPackages: readonly CatalogPackage[] = [
   ...facialPackages,
   ...corporalPackages,
@@ -24,3 +24,6 @@ export function filterCatalogPackages(filters: {
       (!filters.category || item.category === filters.category)
   );
 }
+
+/** Paquetes autorizados para mostrarse en Equilibria Beauty. */
+export const publishedBeautyPackages: CatalogPackage[] = catalogPackages.filter(item => item.businessUnit === "beauty" && item.publicationStatus === "published");

@@ -5,6 +5,7 @@ import "./brand-family.css";
 import "./contact-details.css";
 import "./footer.css";
 import "./experience-media.css";
+import "./catalog.css";
 
 export const metadata: Metadata = {
   title: "Equilibria Beauty — Belleza en Equilibrio",

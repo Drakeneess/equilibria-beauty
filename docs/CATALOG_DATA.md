@@ -1,9 +1,9 @@
-# Catálogo interno de Equilibria Beauty
+# Catálogo de Equilibria Beauty — fuente estática
 
 ## Estado actual
 - **23 paquetes** extraídos de los 2 catálogos aportados: **12 faciales** + **11 corporales**.
 - **Unidad de negocio:** `beauty` para los 23. Ningún paquete completo fue clasificado como `wellness`.
-- **No se ha conectado este catálogo al frontend**: `src/data/treatments.ts` sigue siendo la fuente ilustrativa visible en la web.
+- **Frontend conectado:** `src/components/CatalogSection.tsx` consume `publishedBeautyPackages` desde `src/data/catalog/`. Los 4 tratamientos antiguos de `src/data/treatments.ts` ya no se muestran.
 - **No existe backend ni persistencia** de estos paquetes. Todo está en módulos TypeScript bajo `src/data/catalog/`.
 
 ## Estructura
@@ -36,4 +36,4 @@ const packageDetail = getCatalogPackageById("beauty-facial-ritual-de-loto");
 5. No copiar el pie de los PDF «Calle Cualquiera 123, Cualquier Lugar»: es un marcador provisional.
 6. Decidir posteriormente si el backend contendrá entidades `catalog_items`, `package_inclusions`, `session_breakdown` y `prices`, conservando estos IDs.
 
-Todos los registros tienen `publicationStatus: "internal_draft"`. Esta carpeta no modifica reservas ni imágenes ni la web pública.
+Los 23 registros se publican con `publicationStatus: "published"` por decisión del equipo. En la web figura el aviso de confirmar precios y disponibilidad. Se mantiene la consulta por WhatsApp sin reserva automática.

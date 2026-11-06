@@ -1,6 +1,6 @@
 import type { CatalogPackage } from "./types";
 
-/** Datos transcritos del catálogo corporal; NO publicados. */
+/** Paquetes corporales del catálogo, disponibles en la web; precios sujetos a confirmación. */
 export const corporalPackages = [
   {
     "id": "beauty-corporal-reduccion-express",
@@ -28,7 +28,7 @@ export const corporalPackages = [
     },
     "businessUnit": "beauty",
     "category": "corporal",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-corporal-ice-sculpt",
@@ -57,7 +57,7 @@ export const corporalPackages = [
     },
     "businessUnit": "beauty",
     "category": "corporal",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-corporal-bella-figura",
@@ -88,7 +88,7 @@ export const corporalPackages = [
     },
     "businessUnit": "beauty",
     "category": "corporal",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-corporal-silueta-de-diosa",
@@ -120,7 +120,7 @@ export const corporalPackages = [
     },
     "businessUnit": "beauty",
     "category": "corporal",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-corporal-gluteo-power-up",
@@ -148,7 +148,7 @@ export const corporalPackages = [
     },
     "businessUnit": "beauty",
     "category": "corporal",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-corporal-modelo-natural",
@@ -176,7 +176,7 @@ export const corporalPackages = [
     },
     "businessUnit": "beauty",
     "category": "corporal",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-corporal-curvas-delicadas",
@@ -203,7 +203,7 @@ export const corporalPackages = [
     },
     "businessUnit": "beauty",
     "category": "corporal",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-corporal-impacto-reductor",
@@ -231,7 +231,7 @@ export const corporalPackages = [
     },
     "businessUnit": "beauty",
     "category": "corporal",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-corporal-esbelta-premium",
@@ -298,7 +298,7 @@ export const corporalPackages = [
     },
     "businessUnit": "beauty",
     "category": "corporal",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-corporal-reina-total",
@@ -383,7 +383,7 @@ export const corporalPackages = [
     },
     "businessUnit": "beauty",
     "category": "corporal",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-corporal-silueta-pro",
@@ -444,6 +444,6 @@ export const corporalPackages = [
     },
     "businessUnit": "beauty",
     "category": "corporal",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   }
 ] as const satisfies readonly CatalogPackage[];

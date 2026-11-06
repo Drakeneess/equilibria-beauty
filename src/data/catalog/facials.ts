@@ -1,6 +1,6 @@
 import type { CatalogPackage } from "./types";
 
-/** Datos transcritos del catálogo facial; NO publicados. */
+/** Paquetes faciales del catálogo, disponibles en la web; precios sujetos a confirmación. */
 export const facialPackages = [
   {
     "id": "beauty-facial-limpieza-equilibria",
@@ -29,7 +29,7 @@ export const facialPackages = [
     },
     "businessUnit": "beauty",
     "category": "facial",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-facial-ritual-de-loto",
@@ -59,7 +59,7 @@ export const facialPackages = [
     },
     "businessUnit": "beauty",
     "category": "facial",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-facial-hielo-de-luna",
@@ -88,7 +88,7 @@ export const facialPackages = [
     },
     "businessUnit": "beauty",
     "category": "facial",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-facial-nube-de-vainilla",
@@ -117,7 +117,7 @@ export const facialPackages = [
     },
     "businessUnit": "beauty",
     "category": "facial",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-facial-luz-de-arroz",
@@ -146,7 +146,7 @@ export const facialPackages = [
     },
     "businessUnit": "beauty",
     "category": "facial",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-facial-luz-de-latte",
@@ -176,7 +176,7 @@ export const facialPackages = [
     },
     "businessUnit": "beauty",
     "category": "facial",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-facial-detox-plus",
@@ -207,7 +207,7 @@ export const facialPackages = [
     },
     "businessUnit": "beauty",
     "category": "facial",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-facial-reafirmante-nocturno",
@@ -237,7 +237,7 @@ export const facialPackages = [
     },
     "businessUnit": "beauty",
     "category": "facial",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-facial-frost-glow",
@@ -265,7 +265,7 @@ export const facialPackages = [
     },
     "businessUnit": "beauty",
     "category": "facial",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-facial-teen-skin-care",
@@ -294,7 +294,7 @@ export const facialPackages = [
     },
     "businessUnit": "beauty",
     "category": "facial",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-facial-glow-basico",
@@ -322,7 +322,7 @@ export const facialPackages = [
     },
     "businessUnit": "beauty",
     "category": "facial",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   },
   {
     "id": "beauty-facial-glow-premium",
@@ -355,6 +355,6 @@ export const facialPackages = [
     },
     "businessUnit": "beauty",
     "category": "facial",
-    "publicationStatus": "internal_draft"
+    "publicationStatus": "published"
   }
 ] as const satisfies readonly CatalogPackage[];

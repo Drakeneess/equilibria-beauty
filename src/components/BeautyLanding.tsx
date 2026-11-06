@@ -2,15 +2,10 @@
 
 import { useEffect, useRef, useState, type FormEvent, type PointerEvent as ReactPointerEvent } from "react";
 import { BrandMark } from "./BrandMark";
-import { treatments, type TreatmentCategory } from "@/data/treatments";
+import { publishedBeautyPackages } from "@/data/catalog";
+import { CatalogSection } from "./CatalogSection";
 import { beautyContact, institutionalSocials } from "@/data/contact";
 import { ExperienceMedia } from "./ExperienceMedia";
-
-const filters: { id: "all" | TreatmentCategory; label: string }[] = [
-  { id: "all", label: "Todos" },
-  { id: "facial", label: "Faciales" },
-  { id: "corporal", label: "Corporales" },
-];
 
 const faq = [
   {
@@ -38,7 +33,6 @@ export function BeautyLanding() {
   const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const [filter, setFilter] = useState<"all" | TreatmentCategory>("all");
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedTreatment, setSelectedTreatment] = useState("");
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -257,40 +251,7 @@ export function BeautyLanding() {
 
         <div className="ribbon"><div className="wrap"><span>Estética facial</span><i className="mark" /><span>Estética corporal</span><i className="mark" /><span>Cuidado personalizado</span><i className="mark" /><span>Belleza natural</span></div></div>
 
-        <section className="services" id="tratamientos" aria-labelledby="services-title">
-          <div className="wrap">
-            <div className="section-head" data-reveal>
-              <div className="eyebrow">Tratamientos destacados</div>
-              <h2 className="section-title" id="services-title">El arte de <em>cuidarte.</em></h2>
-              <p className="section-desc">Explora propuestas de estética facial y corporal. Los procedimientos presentados son ejemplos sujetos a la definición del catálogo oficial.</p>
-            </div>
-            <div className="filter-row" role="group" aria-label="Filtrar tratamientos" data-reveal>
-              {filters.map(item => <button type="button" key={item.id} className="filter" aria-pressed={filter === item.id} onClick={() => setFilter(item.id)}>{item.label}</button>)}
-            </div>
-            <p className="filter-feedback" aria-live="polite" aria-atomic="true">
-              {filter === "all" ? "Todos los tratamientos" : filter === "facial" ? "Tratamientos faciales" : "Tratamientos corporales"} · {treatments.filter(t => filter === "all" || t.category === filter).length} opciones
-            </p>
-            <div className="service-grid">
-              {treatments.map(t => (
-                <article className="service-card" key={t.id} hidden={filter !== "all" && t.category !== filter}>
-                  <div className="service-image">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={t.image} alt={t.imageAlt} loading="lazy" />
-                    <span className="card-tag">{t.tag}</span>
-                  </div>
-                  <div className="service-info">
-                    <div className="service-num">{t.number}</div>
-                    <h3>{t.title}</h3>
-                    <p>{t.description}</p>
-                    <button className="service-link" type="button" onClick={() => openAppointment(t.title)}>
-                      Consultar tratamiento <span className="arrow">↗</span>
-                    </button>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <CatalogSection onConsult={openAppointment} />
 
         <section className="brand-section" id="nosotros" aria-labelledby="brand-title">
           <div className="brand-layout">
@@ -470,7 +431,7 @@ export function BeautyLanding() {
 
           <div className="footer-bottom">
             <span>© 2026 Equilibria Beauty · Parte de Equilibria.</span>
-            <span>Servicios e imágenes ilustrativos. Las citas se confirman por WhatsApp.</span>
+            <span>Precios sujetos a confirmación. Las citas se coordinan por WhatsApp.</span>
           </div>
         </div>
       </footer>
@@ -486,7 +447,7 @@ export function BeautyLanding() {
               <div className="field"><label htmlFor="full-name">Nombre</label><input id="full-name" name="name" type="text" required maxLength={80} autoComplete="name" placeholder="Tu nombre" /></div>
               <div className="field"><label htmlFor="interest">Tratamiento o motivo de consulta (orientativo)</label><select id="interest" required value={selectedTreatment} onChange={event => setSelectedTreatment(event.target.value)}>
                 <option value="">Selecciona una opción</option>
-                {treatments.map(t => <option key={t.id} value={t.title}>{t.title}</option>)}
+                {publishedBeautyPackages.map(item => <option key={item.id} value={item.name}>{item.name}</option>)}
                 <option value="Consulta general de estética">Consulta general de estética</option>
               </select></div>
               <div className="field"><label htmlFor="message">¿Qué te gustaría consultar? (opcional)</label><textarea id="message" name="message" rows={3} placeholder="Cuéntanos brevemente qué buscas" /></div>
