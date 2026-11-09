@@ -47,3 +47,9 @@ Los 23 registros se publican con `publicationStatus: "published"` por decisión 
 - La interfaz tiene un fallback para futuros paquetes sin imagen asignada.
 - **Licencias:** el material fuente incluye fotografías que podrían ser de bancos de imágenes. Confirmar el permiso de reutilización comercial de esas fotografías antes del lanzamiento público.
 - Si se cambia un archivo, conservar el ID en su nombre o actualizar la asignación `getCatalogImage`.
+
+
+## Presentación pública sin precios
+A partir de esta actualización, la página muestra los **23 tratamientos**, sus procedimientos y sesiones, pero no muestra importes ni filtros por precio. Las consultas por WhatsApp siguen funcionando.
+
+**Los precios se mantienen en los archivos TypeScript de origen** para un futuro backend. Este repositorio es público y estos valores no deben considerarse secretos ni privados. La retirada de precios del sitio no modifica la naturaleza comercial de una página que promociona servicios y no determina la elegibilidad para un plan de alojamiento gratuito.

@@ -5,7 +5,6 @@ import { publishedBeautyPackages, type CatalogPackage, type CatalogCategory } fr
 import { getCatalogImage } from "@/data/catalog/media";
 
 type Category = "all" | CatalogCategory;
-type Order = "catalog" | "price-asc" | "price-desc";
 const PAGE_SIZE = 6;
 const categoryOptions: { value: Category; label: string }[] = [
   { value: "all", label: "Todos" },
@@ -13,7 +12,6 @@ const categoryOptions: { value: Category; label: string }[] = [
   { value: "corporal", label: "Corporales" },
 ];
 const normalized = (text: string) => text.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
-const price = (amount:number) => "Bs " + new Intl.NumberFormat("es-BO",{maximumFractionDigits:0}).format(amount);
 function sessionText(item:CatalogPackage) {
   if(item.sessions.mode === "fixed" && item.sessions.total !== null)
     return item.sessions.total === 1 ? "1 sesión" : item.sessions.total + " sesiones";
@@ -23,7 +21,6 @@ function sessionText(item:CatalogPackage) {
 export function CatalogSection({onConsult}:{onConsult:(packageName:string)=>void}) {
   const [category,setCategory] = useState<Category>("all");
   const [search,setSearch] = useState("");
-  const [sort,setSort] = useState<Order>("catalog");
   const [limit,setLimit] = useState(PAGE_SIZE);
 
   const filtered = useMemo(() => {
@@ -32,11 +29,8 @@ export function CatalogSection({onConsult}:{onConsult:(packageName:string)=>void
       (category === "all" || item.category === category) &&
       (!q || normalized([item.name,...item.includedProcedures].join(" ")).includes(q))
     ));
-    if(sort !== "catalog") {
-      result.sort((a,b) => sort === "price-asc" ? a.price.amount - b.price.amount : b.price.amount - a.price.amount);
-    }
     return result;
-  },[category,search,sort]);
+  },[category,search]);
   const shown = filtered.slice(0,limit);
   const remaining = filtered.length - shown.length;
   const numberIn = (value:Category) => value === "all"
@@ -72,14 +66,6 @@ export function CatalogSection({onConsult}:{onConsult:(packageName:string)=>void
               <span aria-hidden="true" className="catalog-search__icon">⌕</span>
               <input type="search" value={search} placeholder="Buscar tratamiento..."
                 onChange={e=>{setSearch(e.target.value);setLimit(PAGE_SIZE);}} />
-            </label>
-            <label className="catalog-sort">
-              <span className="catalog-sr-only">Ordenar por precio</span>
-              <select value={sort} onChange={e=>{setSort(e.target.value as Order);setLimit(PAGE_SIZE);}}>
-                <option value="catalog">Orden del catálogo</option>
-                <option value="price-asc">Menor precio</option>
-                <option value="price-desc">Mayor precio</option>
-              </select>
             </label>
           </div>
         </div>
@@ -137,12 +123,9 @@ export function CatalogSection({onConsult}:{onConsult:(packageName:string)=>void
                   </div>
                 </details>
                 <div className="catalog-card__bottom">
-                  <div>
-                    <span className="catalog-card__eyebrow">PRECIO DE CATÁLOGO</span>
-                    <strong>{price(item.price.amount)}</strong>
-                  </div>
+                  <span className="catalog-card__contact-label">Información y disponibilidad</span>
                   <button type="button" onClick={()=>onConsult(item.name)}>
-                    Consultar paquete <span aria-hidden="true">↗</span>
+                    Consultar tratamiento <span aria-hidden="true">↗</span>
                   </button>
                 </div>
               </article>
@@ -151,7 +134,7 @@ export function CatalogSection({onConsult}:{onConsult:(packageName:string)=>void
         ) : (
           <div className="catalog-empty">
             <h3>No encontramos paquetes</h3><p>Prueba con otra búsqueda o vuelve al catálogo completo.</p>
-            <button type="button" onClick={()=>{setSearch("");setCategory("all");setSort("catalog");setLimit(PAGE_SIZE);}}>Ver todos los paquetes</button>
+            <button type="button" onClick={()=>{setSearch("");setCategory("all");setLimit(PAGE_SIZE);}}>Ver todos los paquetes</button>
           </div>
         )}
         {remaining>0 && (
@@ -163,8 +146,8 @@ export function CatalogSection({onConsult}:{onConsult:(packageName:string)=>void
           </div>
         )}
         <p className="catalog-disclaimer">
-          Precios y procedimientos basados en los catálogos facilitados. Imágenes ilustrativas, no fotografías
-          de resultados reales. Confirma vigencia, disponibilidad y número de citas antes de reservar.
+          Los procedimientos provienen de los catálogos de Equilibria. Las imágenes son ilustrativas, no
+          fotografías de resultados reales. Consulta la disponibilidad y el número de citas con nuestro equipo.
         </p>
       </div>
     </section>

@@ -439,7 +439,7 @@ export function BeautyLanding() {
 
           <div className="footer-bottom">
             <span>© 2026 Equilibria Beauty · Parte de Equilibria.</span>
-            <span>Precios sujetos a confirmación. Las citas se coordinan por WhatsApp.</span>
+            <span>La disponibilidad se confirma por WhatsApp.</span>
           </div>
         </div>
       </footer>
