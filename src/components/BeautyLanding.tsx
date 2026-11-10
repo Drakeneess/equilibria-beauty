@@ -22,7 +22,7 @@ const faq = [
   },
   {
     question: "¿Dónde se encuentra Equilibria Beauty?",
-    answer: "Estamos en La Paz, frente a la plaza Isabel la Católica, en el edificio Torres Mall, Torre B, piso 4, oficina 405.",
+    answer: "Estamos en Las Torres Mall, Av. Arce N.º 2519, frente a la plaza Isabel la Católica, Torre B, piso 4, oficina 405, La Paz.",
   },
   {
     question: "¿Cuáles son los horarios de atención?",
@@ -404,11 +404,11 @@ export function BeautyLanding() {
             <section className="footer-col footer-location" aria-labelledby="footer-location-title">
               <h2 className="footer-heading" id="footer-location-title">Dónde estamos</h2>
               <address className="footer-address">
-                <span className="footer-address__place">Torres Mall · La Paz</span>
+                <span className="footer-address__place">Las Torres Mall · La Paz</span>
                 <span>{beautyContact.location}</span>
                 <span>{beautyContact.address}</span>
               </address>
-              <a className="footer-map-action" href={beautyContact.directionsUrl} target="_blank" rel="noopener noreferrer">
+              <a className="footer-map-action" href={beautyContact.mapUrl} target="_blank" rel="noopener noreferrer">
                 Ver ubicación <span aria-hidden="true">↗</span>
               </a>
             </section>

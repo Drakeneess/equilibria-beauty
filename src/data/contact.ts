@@ -6,9 +6,12 @@ export const beautyContact = {
   phoneDisplay: "+591 715 31354",
   telUrl: "tel:+59171531354",
   whatsappBaseUrl: "https://wa.me/59171531354",
-  location: "Edificio Torres Mall, Torre B, piso 4, oficina 405",
-  address: "Frente a la plaza Isabel la Católica, La Paz, Bolivia.",
-  directionsUrl: "https://www.google.com/maps/search/?api=1&query=Torres%20Mall%20Torre%20B%20La%20Paz%20Bolivia",
+  location: "Las Torres Mall, Torre B, piso 4, oficina 405",
+  address: "Av. Arce N.º 2519, frente a la plaza Isabel la Católica, La Paz, Bolivia.",
+  // El pin señala el complejo Las Torres Mall, no la oficina interior.
+  // Usar coordenadas evita que Google Maps sugiera el Torre León Mall Center.
+  mapUrl: "https://www.google.com/maps/search/?api=1&query=-16.50924%2C-68.12309",
+  directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=-16.50924%2C-68.12309",
   weekdays: "Lunes a viernes: 09:00–19:00",
   saturday: "Sábados: solo con cita previa",
 } as const;
